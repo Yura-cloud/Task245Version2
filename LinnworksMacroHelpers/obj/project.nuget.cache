@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "edLL4+V/Rl8hDEKznjifVUlwxeUM9UvUQOk/IvRE8215kGu4bsl1krCJsBrSbtBSxt7bK/P3HCxL7tkD4hp0eQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Yura\\OneDrive\\Desktop\\Patternika\\Tasks\\245\\Task245Version2\\LinnworksMacroHelpers\\LinnworksMacroHelpers.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Yura\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\2.0.0\\microsoft.extensions.configuration.abstractions.2.0.0.nupkg.sha512",
+    "C:\\Users\\Yura\\.nuget\\packages\\microsoft.extensions.primitives\\2.0.0\\microsoft.extensions.primitives.2.0.0.nupkg.sha512",
+    "C:\\Users\\Yura\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Yura\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\Yura\\.nuget\\packages\\newtonsoft.json\\12.0.1\\newtonsoft.json.12.0.1.nupkg.sha512",
+    "C:\\Users\\Yura\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.4.0\\system.runtime.compilerservices.unsafe.4.4.0.nupkg.sha512"
+  ],
+  "logs": []
+}

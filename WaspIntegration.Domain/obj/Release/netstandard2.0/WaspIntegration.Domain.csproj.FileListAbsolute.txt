@@ -1,0 +1,10 @@
+C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Api\WaspIntegration.Domain\bin\Release\netstandard2.0\WaspIntegration.Domain.deps.json
+C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Api\WaspIntegration.Domain\bin\Release\netstandard2.0\WaspIntegration.Domain.dll
+C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Api\WaspIntegration.Domain\bin\Release\netstandard2.0\WaspIntegration.Domain.pdb
+C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Api\WaspIntegration.Domain\obj\Release\netstandard2.0\WaspIntegration.Domain.csproj.AssemblyReference.cache
+C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Api\WaspIntegration.Domain\obj\Release\netstandard2.0\WaspIntegration.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Api\WaspIntegration.Domain\obj\Release\netstandard2.0\WaspIntegration.Domain.AssemblyInfoInputs.cache
+C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Api\WaspIntegration.Domain\obj\Release\netstandard2.0\WaspIntegration.Domain.AssemblyInfo.cs
+C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Api\WaspIntegration.Domain\obj\Release\netstandard2.0\WaspIntegration.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Api\WaspIntegration.Domain\obj\Release\netstandard2.0\WaspIntegration.Domain.dll
+C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Api\WaspIntegration.Domain\obj\Release\netstandard2.0\WaspIntegration.Domain.pdb

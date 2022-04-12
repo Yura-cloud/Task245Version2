@@ -1,0 +1,5 @@
+C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Api\Task245API\obj\Debug\netstandard2.0\WaspAPI.csproj.AssemblyReference.cache
+C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Api\Task245API\obj\Debug\netstandard2.0\WaspAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Api\Task245API\obj\Debug\netstandard2.0\WaspAPI.AssemblyInfoInputs.cache
+C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Api\Task245API\obj\Debug\netstandard2.0\WaspAPI.AssemblyInfo.cs
+C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Api\Task245API\obj\Debug\netstandard2.0\WaspAPI.csproj.CoreCompileInputs.cache

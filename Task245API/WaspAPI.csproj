@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="3.3.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LinnMacroCustomer\LinnMacroCustomer.csproj" />
+    <ProjectReference Include="..\LinnworksAPI\LinnworksAPI.csproj" />
+    <ProjectReference Include="..\LinnworksMacroHelpers\LinnworksMacroHelpers.csproj" />
+    <ProjectReference Include="..\Task245.Business.Services\WaspIntegration.Business.Services.csproj" />
+    <ProjectReference Include="..\Task245.Domain.Service.Interfaces\WaspIntegration.Service.Interfaces.csproj" />
+  </ItemGroup>
+
+
+</Project>

@@ -1,0 +1,10 @@
+C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Api\LinnworksAPI\bin\Release\netstandard2.0\LinnworksAPI.deps.json
+C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Api\LinnworksAPI\bin\Release\netstandard2.0\LinnworksAPI.dll
+C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Api\LinnworksAPI\bin\Release\netstandard2.0\LinnworksAPI.pdb
+C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Api\LinnworksAPI\obj\Release\netstandard2.0\LinnworksAPI.csproj.AssemblyReference.cache
+C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Api\LinnworksAPI\obj\Release\netstandard2.0\LinnworksAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Api\LinnworksAPI\obj\Release\netstandard2.0\LinnworksAPI.AssemblyInfoInputs.cache
+C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Api\LinnworksAPI\obj\Release\netstandard2.0\LinnworksAPI.AssemblyInfo.cs
+C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Api\LinnworksAPI\obj\Release\netstandard2.0\LinnworksAPI.csproj.CoreCompileInputs.cache
+C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Api\LinnworksAPI\obj\Release\netstandard2.0\LinnworksAPI.dll
+C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Api\LinnworksAPI\obj\Release\netstandard2.0\LinnworksAPI.pdb

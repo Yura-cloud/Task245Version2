@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Mail.dll" Version="3.0.22035.1741" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LinnworksMacroHelpers\LinnworksMacroHelpers.csproj" />
+    <ProjectReference Include="..\Task245.Domain.Service.Interfaces\WaspIntegration.Service.Interfaces.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "QP08/0p+4X/b18wrZ/3YZQmzDrikgO3Jn8UG6V7D22vTaffhgoR5Gg4+i7WoJz/Hwvf/1W8mfGIxpPmrY8qacQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Yura\\OneDrive\\Desktop\\Patternika\\Tasks\\245\\Task245Version2\\LinnworksAPI\\LinnworksAPI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Yura\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Yura\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\Yura\\.nuget\\packages\\newtonsoft.json\\12.0.1\\newtonsoft.json.12.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}
