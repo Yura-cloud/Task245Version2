@@ -24,3 +24,5 @@ C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Version2\LinnworksMac
 C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Version2\LinnworksMacroHelpers\obj\Debug\netstandard2.0\LinnworksMacroHelpers.csproj.CopyComplete
 C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Version2\LinnworksMacroHelpers\obj\Debug\netstandard2.0\LinnworksMacroHelpers.dll
 C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Version2\LinnworksMacroHelpers\obj\Debug\netstandard2.0\LinnworksMacroHelpers.pdb
+C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Version2\LinnworksMacroHelpers\bin\Debug\netstandard2.0\WaspIntegration.Domain.dll
+C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Version2\LinnworksMacroHelpers\bin\Debug\netstandard2.0\WaspIntegration.Domain.pdb

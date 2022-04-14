@@ -229,9 +229,9 @@ namespace WaspIntegration.Business.Services
             {
                 ordersNumber.Add(new ManifestOrderInfoModel
                 {
-                    OrderNumber = orders[i].Substring(11, 12),
+                    OrderNumber = orders[i].Substring(11, 13),
                     CompanyCode = orders[i].Substring(0, 3),
-                    OrderDate = orders[i].Substring(23, 10)
+                    OrderDate = orders[i].Substring(24, 10)
                 });
             }
 

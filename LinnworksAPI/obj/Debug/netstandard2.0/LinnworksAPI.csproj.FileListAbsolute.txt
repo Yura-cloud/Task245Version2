@@ -18,3 +18,6 @@ C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Version2\LinnworksAPI
 C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Version2\LinnworksAPI\obj\Debug\netstandard2.0\LinnworksAPI.csproj.CoreCompileInputs.cache
 C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Version2\LinnworksAPI\obj\Debug\netstandard2.0\LinnworksAPI.dll
 C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Version2\LinnworksAPI\obj\Debug\netstandard2.0\LinnworksAPI.pdb
+C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Version2\LinnworksAPI\bin\Debug\netstandard2.0\WaspIntegration.Domain.dll
+C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Version2\LinnworksAPI\bin\Debug\netstandard2.0\WaspIntegration.Domain.pdb
+C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Version2\LinnworksAPI\obj\Debug\netstandard2.0\LinnworksAPI.csproj.CopyComplete

@@ -20,7 +20,7 @@ namespace WaspIntegration
 
             services.AddScoped<IManifestService, ManifestService>();
 
-            services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IOrderService, CreateOrderService>();
 
             services.AddScoped<IMailService, MailService>();
 

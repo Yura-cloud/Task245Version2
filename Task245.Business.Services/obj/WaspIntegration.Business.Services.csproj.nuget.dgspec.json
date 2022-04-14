@@ -27,7 +27,11 @@
         "frameworks": {
           "netstandard2.0": {
             "targetAlias": "netstandard2.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\Yura\\OneDrive\\Desktop\\Patternika\\Tasks\\245\\Task245Version2\\WaspIntegration.Domain\\WaspIntegration.Domain.csproj": {
+                "projectPath": "C:\\Users\\Yura\\OneDrive\\Desktop\\Patternika\\Tasks\\245\\Task245Version2\\WaspIntegration.Domain\\WaspIntegration.Domain.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

@@ -4,6 +4,7 @@ using System.Text;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using WaspIntegration.Domain;
 
 namespace LinnworksAPI
 {
@@ -12,7 +13,12 @@ namespace LinnworksAPI
         public OrdersController(ApiContext apiContext) : base(apiContext)
         {                       
         }
-
+        
+        // public List<Guid> CreateOrdersCustom(List<ChannelOrderCustom> orders,String location)
+        // {
+	       //  var response = GetResponse("Orders/CreateOrders", "orders=" + System.Net.WebUtility.UrlEncode(JsonFormatter.ConvertToJson(orders)) + "&location=" + System.Net.WebUtility.UrlEncode(location) + "");
+	       //  return JsonFormatter.ConvertFromJson<List<Guid>>(response);
+        // }
         /// <summary>
         /// Add a coupon to a specific order 
         /// </summary>

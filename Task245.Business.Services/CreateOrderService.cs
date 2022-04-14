@@ -10,17 +10,17 @@ using WaspIntegration.Service.Interfaces;
 
 namespace WaspIntegration.Business.Services
 {
-    public class OrderService : IOrderService
+    public class CreateOrderService : IOrderService
     {
         private Guid FulfilmentCenter { get; set; }
-        private readonly ILogger<OrderService> _logger;
+        private readonly ILogger<CreateOrderService> _logger;
         private readonly IFtpServerService _ftpServerService;
         private const int ItemQuantity = 1;
         private const string Source = "Wasp";
         private const string SubSource = "Studio";
-        public LinnworksMacroBase LinnWorks { get; set; }
+        private LinnworksMacroBase LinnWorks { get; }
 
-        public OrderService(ILogger<OrderService> logger, IFtpServerService ftpServerService)
+        public CreateOrderService(ILogger<CreateOrderService> logger, IFtpServerService ftpServerService)
         {
             _logger = logger;
             _ftpServerService = ftpServerService;
@@ -40,8 +40,8 @@ namespace WaspIntegration.Business.Services
 
             FulfilmentCenter = locationId.Value;
 
-            var ordersLines = _ftpServerService.GetLinesOfOrdersFromServer();
-            //var ordersLines = _ftpServerService.GetLinesOfOrdersFromLocalComputer();
+            //var ordersLines = _ftpServerService.GetLinesOfOrdersFromServer();
+            var ordersLines = _ftpServerService.GetLinesOfOrdersFromLocalComputer();
 
             if (!ordersLines.Any())
             {
@@ -99,7 +99,6 @@ namespace WaspIntegration.Business.Services
                     $"**Failed while AddExtendedProperties, for this OrderId => {orderId}, with message {e.Message}**");
             }
         }
-
 
         private void AddOrdersItems(List<OpenOrder> openOrders)
         {

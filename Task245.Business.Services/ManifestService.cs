@@ -15,11 +15,7 @@ namespace WaspIntegration.Business.Services
     {
         private readonly ILogger<ManifestService> _logger;
         private readonly IFtpServerService _ftpServerService;
-        private readonly string _orderDelayDate = new string(' ', 10);
-        private readonly string _orderDelayReason = new string(' ', 2);
-        private const int ParcelDespatchOutcome = 0;
-        private const string SupplierCode = "A1234";
-        private const string CompanyCode = "001";
+        private readonly ManifestModel _manifestModel;
         public LinnworksMacroBase LinnWorks { get; set; }
 
         public ManifestService(ILogger<ManifestService> logger, IFtpServerService ftpServerService)
@@ -27,6 +23,7 @@ namespace WaspIntegration.Business.Services
             _logger = logger;
             _ftpServerService = ftpServerService;
             LinnWorks = new LinnworksMacroBase();
+            _manifestModel = new ManifestModel();
         }
 
         public void UploadManifest(Guid? locationId, IConfiguration configuration, string token)
@@ -132,8 +129,7 @@ namespace WaspIntegration.Business.Services
                 return new List<OrderExtendedProperty>();
             }
         }
-
-
+        
         private List<OrderDetails> GetOrdersDetails(List<Guid> orders)
         {
             try
@@ -186,19 +182,19 @@ namespace WaspIntegration.Business.Services
 
         private string CreateInfoFromOrder(OrderDetails order)
         {
-            var info = SupplierCode
-                       + CompanyCode
+            var info = ManifestModel.SupplierCode
+                       + ManifestModel.CompanyCode
                        + order.CustomerInfo.ChannelBuyerName
                        + order.GeneralInfo.ReferenceNum
                        + order.GeneralInfo.ReceivedDate.ToString("dd.MM.yyyy")
                        + order.Items.FirstOrDefault()?.ItemNumber
                        + order.GeneralInfo.ExternalReferenceNum
-                       + ParcelDespatchOutcome
+                       + ManifestModel.ParcelDespatchOutcome
                        + order.GeneralInfo.DespatchByDate.ToString("dd.MM.yyyy")
                        + order.GeneralInfo.DespatchByDate.ToString("dd.MM.yyyy").PadRight(20)
-                       + order.GeneralInfo.SubSource
-                       + _orderDelayDate
-                       + _orderDelayReason;
+                       + order.ExtendedProperties.FirstOrDefault(p=>p.Name=="HaulierCode")?.Value
+                       + _manifestModel.OrderDelayDate
+                       + _manifestModel.OrderDelayReason;
 
             return info;
         }

@@ -28,3 +28,5 @@ C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Version2\LinnMacroCus
 C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Version2\LinnMacroCustomer\obj\Debug\netstandard2.0\LinnMacroCustomer.csproj.CopyComplete
 C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Version2\LinnMacroCustomer\obj\Debug\netstandard2.0\LinnMacroCustomer.dll
 C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Version2\LinnMacroCustomer\obj\Debug\netstandard2.0\LinnMacroCustomer.pdb
+C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Version2\LinnMacroCustomer\bin\Debug\netstandard2.0\WaspIntegration.Domain.dll
+C:\Users\Yura\OneDrive\Desktop\Patternika\Tasks\245\Task245Version2\LinnMacroCustomer\bin\Debug\netstandard2.0\WaspIntegration.Domain.pdb

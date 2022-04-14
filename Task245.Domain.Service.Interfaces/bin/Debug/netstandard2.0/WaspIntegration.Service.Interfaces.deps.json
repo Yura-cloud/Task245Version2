@@ -85,7 +85,8 @@
       },
       "LinnworksAPI/1.0.0": {
         "dependencies": {
-          "Newtonsoft.Json": "12.0.1"
+          "Newtonsoft.Json": "12.0.1",
+          "WaspIntegration.Domain": "1.0.0"
         },
         "runtime": {
           "LinnworksAPI.dll": {}
