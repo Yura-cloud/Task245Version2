@@ -25,7 +25,7 @@ namespace WaspAPI.Controllers
         }
 
         [HttpGet]
-        public IActionResult CanselOrders(string token, string email, string appPassword,string location)
+        public IActionResult CancelOrders(string token, string email, string appPassword,string location)
         {
             try
             {
@@ -36,7 +36,7 @@ namespace WaspAPI.Controllers
                     return Ok();
                 }
 
-                _canceledOrdersService.ParkedCanceledOrders(mailText, _configuration, token,location);
+                _canceledOrdersService.ParkingCanceledOrders(mailText, _configuration, token,location);
             }
             catch (Exception e)
             {

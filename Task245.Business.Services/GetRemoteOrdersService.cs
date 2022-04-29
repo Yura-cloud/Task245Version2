@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using Microsoft.Extensions.Logging;
 using Renci.SshNet;
@@ -9,28 +8,19 @@ using WaspIntegration.Service.Interfaces;
 
 namespace WaspIntegration.Business.Services
 {
-    public class FtpServerService : IFtpServerService
+    public class GetRemoteOrdersService : IDownloadOrdersService
     {
-        private readonly ILogger<FtpServerService> _logger;
+        private readonly ILogger<GetRemoteOrdersService> _logger;
         public FtpSettingsModel FtpSettings { get; set; }
 
-        public FtpServerService(IFtpConfigManagerService ftpConfig, ILogger<FtpServerService> logger)
+        public GetRemoteOrdersService(IFtpConfigManagerService ftpConfig, ILogger<GetRemoteOrdersService> logger)
         {
             _logger = logger;
             FtpSettings = new FtpSettingsModel(ftpConfig.Port, ftpConfig.UserName, ftpConfig.Password,
                 ftpConfig.Host, ftpConfig.ReadPath, ftpConfig.WritePath, ftpConfig.Key);
         }
 
-        //This method is only for testing purpose, not for release
-        public string[] GetRowsOfOrdersFromLocalComputer()
-        {
-            var textFile = "C:\\Users\\Yura\\OneDrive\\Desktop\\New folder\\OneOrder.txt";
-            string[] totalOrders = File.ReadAllLines(textFile);
-            return totalOrders;
-        }
-
-
-        public string[] GetRowsOfOrdersFromServer()
+        public string[] GetRowsOfOrders()
         {
             try
             {
@@ -62,33 +52,6 @@ namespace WaspIntegration.Business.Services
             {
                 _logger.LogDebug($"**Failed while working with FTP Server, with message {e.Message}**");
                 return Array.Empty<string>();
-            }
-        }
-
-        public bool WriteFilesToServer(string content)
-        {
-            try
-            {
-                using (var client = new SftpClient(FtpSettings.Host, FtpSettings.Port, FtpSettings.UserName,
-                           FtpSettings.Key))
-                {
-                    _logger.LogInformation("**Trying to connect**");
-                    client.Connect();
-                    _logger.LogInformation("**Connection to Server, was established successfully**");
-                    
-                    if (client.Exists(FtpSettings.WritePath))
-                    {
-                        client.DeleteFile(FtpSettings.WritePath);
-                    }
-                    client.WriteAllText(FtpSettings.WritePath, content);
-                }
-
-                return true;
-            }
-            catch (Exception e)
-            {
-                _logger.LogDebug($"**Failed while working with FTP Server, with message {e.Message}**");
-                return false;
             }
         }
     }

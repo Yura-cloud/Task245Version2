@@ -4,7 +4,8 @@ namespace WaspIntegration.Domain
 {
     public class FtpSettingsModel
     {
-        public FtpSettingsModel(int port, string userName, string password, string host, string readPath, string writePath, PrivateKeyFile key)
+        public FtpSettingsModel(int port, string userName, string password, string host, string readPath,
+            string writePath, PrivateKeyFile key)
         {
             Port = port;
             UserName = userName;

@@ -27,7 +27,7 @@ namespace WaspIntegration.Business.Services
             LinnWorks = new LinnworksMacroBase();
         }
 
-        public void ParkedCanceledOrders(string emailText, IConfiguration configuration, string token,
+        public void ParkingCanceledOrders(string emailText, IConfiguration configuration, string token,
             string locationName)
         {
             LinnWorks.Api = InitializeHelper.GetApiManagerForCanceledOrders(configuration, token);
@@ -41,16 +41,16 @@ namespace WaspIntegration.Business.Services
 
             FulfilmentCenter = locationId.Value;
 
-            var ordersDetails = GetOrdersDetailsFromEmailTest(emailText);
+            var ordersDetails = GetOrdersDetailsFromEmail(emailText);
             if (ordersDetails.Count == 0)
             {
                 _logger.LogInformation("**There are no canceled orders in Mail**");
                 return;
             }
 
-            var changeTag = ChangeOrdersTag(ordersDetails.Select(o => o.OrderId).ToList(), ParkedTag);
+            var tagChanged = ChangeOrdersTag(ordersDetails.Select(o => o.OrderId).ToList(), ParkedTag);
 
-            if (changeTag)
+            if (tagChanged)
             {
                 AddNotes(ordersDetails, "**This order was canceled in Wasp`s system**");
                 return;
@@ -59,7 +59,7 @@ namespace WaspIntegration.Business.Services
             _logger.LogInformation($"**It is not possible to add Note cause program failed to change Tag**");
         }
 
-        private List<OrderDetails> GetOrdersDetailsFromEmailTest(string emailText)
+        private List<OrderDetails> GetOrdersDetailsFromEmail(string emailText) 
         {
             var manifestOrders = GetManifestOrders(emailText);
             if (manifestOrders.Count == 0)
@@ -70,7 +70,7 @@ namespace WaspIntegration.Business.Services
             var ordersDetails = new List<OrderDetails>();
             foreach (var order in manifestOrders)
             {
-                var orderDetails = GetOrderDetailsTest(order);
+                var orderDetails = GetOrderDetails(order);
                 if (orderDetails.OrderId != Guid.Empty)
                 {
                     ordersDetails.Add(orderDetails);
@@ -81,30 +81,6 @@ namespace WaspIntegration.Business.Services
         }
 
         private OrderDetails GetOrderDetails(ManifestOrderInfoModel orderOrderInfo)
-        {
-            try
-            {
-                var ordersDetails = LinnWorks.Api.Orders.GetOrderDetailsByReferenceId(orderOrderInfo.OrderNumber);
-
-                if (ordersDetails == null || ordersDetails.Count < 1)
-                {
-                    _logger.LogInformation(
-                        $"**There is no OrderDetails with this ReferenceNumber => {orderOrderInfo}**");
-
-                    return new OrderDetails();
-                }
-
-                return GetUniqOrderDetails(ordersDetails, orderOrderInfo);
-            }
-            catch (Exception e)
-            {
-                _logger.LogInformation(
-                    $"**Failed while GetOrderDetailsByReferenceId, ReferenceNumber => {orderOrderInfo}, with this message {e.Message}**");
-                return new OrderDetails();
-            }
-        }
-
-        private OrderDetails GetOrderDetailsTest(ManifestOrderInfoModel orderOrderInfo)
         {
             var ordersIds = GetOrdersIds(orderOrderInfo);
             if (ordersIds.Count == 0)
@@ -188,46 +164,14 @@ namespace WaspIntegration.Business.Services
             }
         }
 
-        private OrderDetails GetUniqOrderDetails(IEnumerable<OrderDetails> ordersDetails,
-            ManifestOrderInfoModel orderInfo)
-        {
-            var filteredOrdersDetails = ordersDetails
-                .Where(o => o.GeneralInfo.ReferenceNum == orderInfo.OrderNumber &&
-                            ConvertorDateTimeHelper.ParseToCurrentCulture(orderInfo.OrderDate) ==
-                            o.GeneralInfo.ReceivedDate.ToShortDateString() &&
-                            o.FolderName.Contains(orderInfo.CompanyCode)
-                )
-                .ToList();
-
-
-            if (filteredOrdersDetails.Count == 1)
-            {
-                return filteredOrdersDetails.FirstOrDefault();
-            }
-
-            if (filteredOrdersDetails.Count == 0)
-            {
-                _logger.LogInformation(
-                    $"**This reference number => {orderInfo}, does not match ReceivedDate or CompanyCode FolderName**");
-            }
-            else
-            {
-                _logger.LogInformation($"**This reference number => {orderInfo}, has several orders**");
-                _logger.LogInformation(
-                    $"**So at this moment there is no way how to figure out what order should be tagged as parked**");
-            }
-
-            return new OrderDetails();
-        }
-
         private List<ManifestOrderInfoModel> GetManifestOrders(string textFromEmail)
         {
-            var ordersNumber = new List<ManifestOrderInfoModel>();
+            var manifestOrdersInfo = new List<ManifestOrderInfoModel>();
             string[] separator = {SupplierCode};
             var orders = textFromEmail.Split(separator, StringSplitOptions.None);
             for (int i = 1; i < orders.Length; i++)
             {
-                ordersNumber.Add(new ManifestOrderInfoModel
+                manifestOrdersInfo.Add(new ManifestOrderInfoModel
                 {
                     OrderNumber = orders[i].Substring(11, 13),
                     CompanyCode = orders[i].Substring(0, 3),
@@ -235,7 +179,7 @@ namespace WaspIntegration.Business.Services
                 });
             }
 
-            return ordersNumber;
+            return manifestOrdersInfo;
         }
 
         private Guid? GetLocationId(string locationName)
@@ -287,34 +231,6 @@ namespace WaspIntegration.Business.Services
             }
 
             return true;
-        }
-
-        private string GetSupplierCode(string text)
-        {
-            var index = text.IndexOf('\n') + 1;
-            var supplierCode = text.Substring(index, 5);
-            return supplierCode;
-        }
-
-        private List<OrderDetails> GetOrdersDetailsFromEmail(string emailText)
-        {
-            var manifestInfo = GetManifestOrders(emailText);
-            if (manifestInfo.Count < 1)
-            {
-                return new List<OrderDetails>();
-            }
-
-            var ordersDetails = new List<OrderDetails>();
-            foreach (var order in manifestInfo)
-            {
-                var orderDetails = GetOrderDetails(order);
-                if (orderDetails.OrderId != Guid.Empty)
-                {
-                    ordersDetails.Add(orderDetails);
-                }
-            }
-
-            return ordersDetails;
         }
     }
 }

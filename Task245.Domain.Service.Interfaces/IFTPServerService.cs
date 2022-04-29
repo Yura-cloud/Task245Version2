@@ -6,8 +6,8 @@ namespace WaspIntegration.Service.Interfaces
     public interface IFtpServerService
     {
         FtpSettingsModel FtpSettings { get; set; }
-        string[] GetLinesOfOrdersFromServer();
-        string[] GetLinesOfOrdersFromLocalComputer();
+        string[] GetRowsOfOrdersFromServer();
+        string[] GetRowsOfOrdersFromLocalComputer();
         bool WriteFilesToServer(string content);
     }
 }
