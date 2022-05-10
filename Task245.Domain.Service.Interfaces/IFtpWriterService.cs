@@ -3,11 +3,9 @@ using WaspIntegration.Domain;
 
 namespace WaspIntegration.Service.Interfaces
 {
-    public interface IFtpServerService
+    public interface IFtpWriterService
     {
         FtpSettingsModel FtpSettings { get; set; }
-        string[] GetRowsOfOrdersFromServer();
-        string[] GetRowsOfOrdersFromLocalComputer();
         bool WriteFilesToServer(string content);
     }
 }

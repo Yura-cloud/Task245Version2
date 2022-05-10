@@ -14,19 +14,20 @@ namespace WaspIntegration.Business.Services
     public class CreateOrderService : IOrderService
     {
         private Guid FulfilmentCenter { get; set; }
+
         private readonly ILogger<CreateOrderService> _logger;
-        private readonly IFtpServerService _ftpServerService;
+
+        private readonly IFtpDownLoaderService _ftpDownLoaderService;
 
         private const int ItemQuantity = 1;
-        
+
         private LinnworksMacroBase LinnWorks { get; }
 
-        public CreateOrderService(ILogger<CreateOrderService> logger, IFtpServerService ftpServerService)
+        public CreateOrderService(ILogger<CreateOrderService> logger, IFtpDownLoaderService ftpDownLoaderService)
         {
             _logger = logger;
-            _ftpServerService = ftpServerService;
+            _ftpDownLoaderService = ftpDownLoaderService;
             LinnWorks = new LinnworksMacroBase();
-            new OpenOrderMapper();
         }
 
         public Guid? PullOrders(string locationName, IConfiguration configuration, string token)
@@ -42,8 +43,7 @@ namespace WaspIntegration.Business.Services
 
             FulfilmentCenter = locationId.Value;
 
-            //var ordersLines = _ftpServerService.GetLinesOfOrdersFromServer();
-            var ordersLines = _ftpServerService.GetRowsOfOrdersFromLocalComputer();
+            var ordersLines = _ftpDownLoaderService.GetRowsOfOrders();
 
             if (!ordersLines.Any())
             {

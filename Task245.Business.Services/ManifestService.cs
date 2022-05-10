@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using LinnworksMacroHelpers.Helpers;
 using Microsoft.Extensions.Configuration;
+using WaspIntegration.Domain;
 using WaspIntegration.Service.Interfaces;
 
 namespace WaspIntegration.Business.Services
@@ -14,14 +15,14 @@ namespace WaspIntegration.Business.Services
     public class ManifestService : IManifestService
     {
         private readonly ILogger<ManifestService> _logger;
-        private readonly IFtpServerService _ftpServerService;
+        private readonly IFtpWriterService _ftpWriterService;
         private readonly ManifestModel _manifestModel;
         public LinnworksMacroBase LinnWorks { get; set; }
 
-        public ManifestService(ILogger<ManifestService> logger, IFtpServerService ftpServerService)
+        public ManifestService(ILogger<ManifestService> logger, IFtpWriterService ftpWriterService)
         {
             _logger = logger;
-            _ftpServerService = ftpServerService;
+            _ftpWriterService = ftpWriterService;
             LinnWorks = new LinnworksMacroBase();
             _manifestModel = new ManifestModel();
         }
@@ -58,7 +59,7 @@ namespace WaspIntegration.Business.Services
             }
 
             var info = GetManifestInfos(ordersDetails);
-            var writeToWaspServer = _ftpServerService.WriteFilesToServer(info);
+            var writeToWaspServer = _ftpWriterService.WriteFilesToServer(info);
             _logger.LogInformation(info);
 
             if (!writeToWaspServer)
@@ -191,7 +192,7 @@ namespace WaspIntegration.Business.Services
                        + order.GeneralInfo.ExternalReferenceNum
                        + ManifestModel.ParcelDespatchOutcome
                        + order.GeneralInfo.DespatchByDate.ToString("dd.MM.yyyy")
-                       + order.GeneralInfo.DespatchByDate.ToString("dd.MM.yyyy").PadRight(20)
+                       + "".PadRight(30)
                        + order.ExtendedProperties.FirstOrDefault(p=>p.Name=="HaulierCode")?.Value
                        + _manifestModel.OrderDelayDate
                        + _manifestModel.OrderDelayReason;

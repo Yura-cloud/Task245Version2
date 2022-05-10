@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Microsoft.Extensions.Logging;
 using Renci.SshNet;
@@ -8,20 +9,22 @@ using WaspIntegration.Service.Interfaces;
 
 namespace WaspIntegration.Business.Services
 {
-    public class GetRemoteOrdersService : IFtpDownLoaderService
+    public class FtpWriterService : IFtpWriterService
     {
-        private readonly ILogger<GetRemoteOrdersService> _logger;
+        private readonly ILogger<FtpWriterService> _logger;
 
-        public FtpSettingsModel FtpSettings { get; }
 
-        public GetRemoteOrdersService(IFtpConfigManagerService ftpConfig, ILogger<GetRemoteOrdersService> logger)
+        public FtpSettingsModel FtpSettings { get; set; }
+
+        public FtpWriterService(IFtpConfigManagerService ftpConfig, ILogger<FtpWriterService> logger)
         {
             _logger = logger;
+
             FtpSettings = new FtpSettingsModel(ftpConfig.Port, ftpConfig.UserName, ftpConfig.Password,
                 ftpConfig.Host, ftpConfig.ReadPath, ftpConfig.WritePath, ftpConfig.Key);
         }
 
-        public string[] GetRowsOfOrders()
+        public bool WriteFilesToServer(string content)
         {
             try
             {
@@ -32,33 +35,20 @@ namespace WaspIntegration.Business.Services
                     client.Connect();
                     _logger.LogInformation("**Connection to Server, was established successfully**");
 
-                    var files = client.ListDirectory(FtpSettings.ReadPath);
-                    if (files == null) return Array.Empty<string>();
-
-                    var totalOrders = new List<string>();
-                    foreach (var file in files)
+                    if (client.Exists(FtpSettings.WritePath))
                     {
-                        if (file.Name == "." || file.Name == "..")
-                        {
-                            continue;
-                        }
-
-                        var orders = client.ReadLines(file.FullName).ToList();
-                        if (!orders.Any())
-                        {
-                            continue;
-                        }
-
-                        totalOrders.AddRange(orders);
+                        client.DeleteFile(FtpSettings.WritePath);
                     }
 
-                    return totalOrders.ToArray();
+                    client.WriteAllText(FtpSettings.WritePath, content);
                 }
+
+                return true;
             }
             catch (Exception e)
             {
                 _logger.LogDebug($"**Failed while working with FTP Server, with message {e.Message}**");
-                return Array.Empty<string>();
+                return false;
             }
         }
     }

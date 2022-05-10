@@ -1,16 +1,16 @@
+using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Serilog;
-using System.IO;
 
-namespace WaspIntegration
+namespace WaspAPI
 {
     public class Program
     {
         public static void Main(string[] args)
         {
             Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Debug()
+                .MinimumLevel.Error()
                 .WriteTo.File(Path.Combine("Logs", "log.txt"))
                 .CreateLogger();
 

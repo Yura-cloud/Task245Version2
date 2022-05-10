@@ -3,11 +3,11 @@ using WaspIntegration.Service.Interfaces;
 
 namespace WaspIntegration.Business.Services
 {
-    public class GetLocalOrdersService : IDownloadOrdersService
+    public class GetLocalOrdersService : IFtpDownLoaderService
     {
         public string[] GetRowsOfOrders()
         {
-            var textFile = "C:\\Users\\Yura\\OneDrive\\Desktop\\New folder\\OneOrder.txt";
+            var textFile = "C:\\Users\\Yura\\OneDrive\\Desktop\\WaspTest\\Orders.txt";
             string[] totalOrders = File.ReadAllLines(textFile);
             return totalOrders;
         }

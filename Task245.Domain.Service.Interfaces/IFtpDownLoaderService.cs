@@ -1,6 +1,6 @@
 namespace WaspIntegration.Service.Interfaces
 {
-    public interface IDownloadOrdersService
+    public interface IFtpDownLoaderService
     {
         string[] GetRowsOfOrders();
     }

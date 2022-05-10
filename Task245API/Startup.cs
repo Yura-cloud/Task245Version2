@@ -5,7 +5,7 @@ using Microsoft.Extensions.Hosting;
 using WaspIntegration.Business.Services;
 using WaspIntegration.Service.Interfaces;
 
-namespace WaspIntegration
+namespace WaspAPI
 {
     public class Startup
     {
@@ -16,7 +16,9 @@ namespace WaspIntegration
 
             services.AddSingleton<IFtpConfigManagerService, FtpConfigManagerService>();
 
-            services.AddScoped<IFtpServerService, FtpServerService>();
+            services.AddScoped<IFtpWriterService, FtpWriterService>();
+
+            services.AddScoped<IFtpDownLoaderService, GetRemoteOrdersService>();
 
             services.AddScoped<IManifestService, ManifestService>();
 
