@@ -11,18 +11,18 @@ using WaspIntegration.Service.Interfaces;
 
 namespace WaspIntegration.Business.Services
 {
-    public class CreateOrdersShortService : IOrderService
+    public class CreateOrdersService : IOrderService
     {
         private Guid FulfilmentCenter { get; set; }
         private string LocationName { get; set; }
 
-        private readonly ILogger<CreateOrdersShortService> _logger;
+        private readonly ILogger<CreateOrdersService> _logger;
 
         private readonly IFtpDownLoaderService _ftpDownLoaderService;
 
         private LinnworksMacroBase LinnWorks { get; }
 
-        public CreateOrdersShortService(ILogger<CreateOrdersShortService> logger,
+        public CreateOrdersService(ILogger<CreateOrdersService> logger,
             IFtpDownLoaderService ftpDownLoaderService)
         {
             _logger = logger;
@@ -30,11 +30,10 @@ namespace WaspIntegration.Business.Services
             LinnWorks = new LinnworksMacroBase();
         }
 
-        public Guid? PullOrders(string locationName, IConfiguration configuration, string token)
+        public Guid? PullOrdersFromWasp(string locationName, IConfiguration configuration, string token)
         {
             LinnWorks.Api = InitializeHelper.GetApiManagerForPullOrders(configuration, token);
             LocationName = locationName;
-
             var locationId = GetLocationId(locationName);
             if (locationId == null)
             {
@@ -43,24 +42,15 @@ namespace WaspIntegration.Business.Services
             }
 
             FulfilmentCenter = locationId.Value;
-
             var ordersLines = _ftpDownLoaderService.GetRowsOfOrders();
-
             if (!ordersLines.Any())
             {
                 _logger.LogWarning("**WASP server does not have any orders**");
                 return FulfilmentCenter;
             }
 
-            var channelOrders = new List<ChannelOrder>();
-            foreach (var line in ordersLines)
-            {
-                var chanelOrder = ChannelOrderMapper.MapOrdersRowsToChannelOrders(line);
-                channelOrders.Add(chanelOrder);
-            }
-
+            var channelOrders = ordersLines.Select(ChannelOrderMapper.MapOrdersRowsToChannelOrders).ToList();
             CreateOpenOrders(channelOrders);
-
             return FulfilmentCenter;
         }
 

@@ -22,9 +22,9 @@ namespace WaspAPI
 
             services.AddScoped<IManifestService, ManifestService>();
 
-            services.AddScoped<IOrderService, CreateOrdersShortService>();
+            services.AddScoped<IOrderService, CreateOrdersService>();
 
-            services.AddScoped<IMailService, MailService>();
+            services.AddScoped<IMailWaspService, MailKitService>();
 
             services.AddScoped<ICanceledOrdersService, CanceledOrdersService>();
 

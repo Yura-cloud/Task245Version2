@@ -14,8 +14,9 @@ namespace WaspIntegration.Business.Services
     public class CanceledOrdersService : ICanceledOrdersService
     {
         private readonly ILogger<CanceledOrdersService> _logger;
+
         private const int ParkedTag = 7;
-        private const string SupplierCode = "R0404";
+
         private Guid FulfilmentCenter { get; set; }
 
         public List<ManifestOrderInfoModel> ManifestInfos { get; set; }
@@ -28,23 +29,23 @@ namespace WaspIntegration.Business.Services
         }
 
         public void ParkingCanceledOrders(string emailText, IConfiguration configuration, string token,
-            string locationName)
+            string locationName, string supplierCode)
         {
             LinnWorks.Api = InitializeHelper.GetApiManagerForCanceledOrders(configuration, token);
 
             var locationId = GetLocationId(locationName);
             if (locationId == null)
             {
-                _logger.LogInformation($"**There is no location name with the given parameter => {locationName}**");
+                _logger.LogError($"**There is no location name with the given parameter => {locationName}**");
                 return;
             }
 
             FulfilmentCenter = locationId.Value;
 
-            var ordersDetails = GetOrdersDetailsFromEmail(emailText);
+            var ordersDetails = GetOrdersDetailsFromEmail(emailText, supplierCode);
             if (ordersDetails.Count == 0)
             {
-                _logger.LogInformation("**There are no canceled orders in Mail**");
+                _logger.LogError("**There are no canceled orders in the Mail**");
                 return;
             }
 
@@ -52,32 +53,32 @@ namespace WaspIntegration.Business.Services
 
             if (tagChanged)
             {
-                AddNotes(ordersDetails, "**This order was canceled in Wasp`s system**");
+                AddNotes(ordersDetails, "This order was canceled in Wasp`s system");
                 return;
             }
 
             _logger.LogInformation($"**It is not possible to add Note cause program failed to change Tag**");
         }
 
-        private List<OrderDetails> GetOrdersDetailsFromEmail(string emailText) 
+        private List<OrderDetails> GetOrdersDetailsFromEmail(string emailText, string supplierCode)
         {
-            var manifestOrders = GetManifestOrders(emailText);
+            if (!emailText.Contains(supplierCode))
+            {
+                _logger.LogError($"Emails do not have such supplier code: {supplierCode}");
+                return new List<OrderDetails>();
+            }
+
+            var manifestOrders = GetManifestOrders(emailText, supplierCode);
             if (manifestOrders.Count == 0)
             {
                 return new List<OrderDetails>();
             }
 
-            var ordersDetails = new List<OrderDetails>();
-            foreach (var order in manifestOrders)
-            {
-                var orderDetails = GetOrderDetails(order);
-                if (orderDetails.OrderId != Guid.Empty)
-                {
-                    ordersDetails.Add(orderDetails);
-                }
-            }
-
-            return ordersDetails;
+            return manifestOrders
+                .Select(GetOrderDetails)
+                .Where(orderDetails => orderDetails.OrderId != Guid.Empty)
+                .Distinct()
+                .ToList();
         }
 
         private OrderDetails GetOrderDetails(ManifestOrderInfoModel orderOrderInfo)
@@ -85,13 +86,13 @@ namespace WaspIntegration.Business.Services
             var ordersIds = GetOrdersIds(orderOrderInfo);
             if (ordersIds.Count == 0)
             {
-                _logger.LogInformation($"**There is no OpenOrders, whit this {orderOrderInfo.OrderNumber} refNumber**");
+                _logger.LogError($"**There is no OpenOrders, whit this {orderOrderInfo.OrderNumber} refNumber**");
                 return new OrderDetails();
             }
 
             if (ordersIds.Count > 1)
             {
-                _logger.LogInformation(
+                _logger.LogError(
                     $"**There are several OpenOrders with this {orderOrderInfo.OrderNumber} refNumber**");
                 return new OrderDetails();
             }
@@ -133,7 +134,7 @@ namespace WaspIntegration.Business.Services
                         DateFrom = Convert.ToDateTime(
                             ConvertorDateTimeHelper.ParseToCurrentCulture(orderOrderInfo.OrderDate)),
                         DateTo = Convert.ToDateTime(
-                            ConvertorDateTimeHelper.ParseToCurrentCulture(orderOrderInfo.OrderDate))
+                            ConvertorDateTimeHelper.ParseToCurrentCulture(orderOrderInfo.OrderDate)).AddDays(1)
                     }
                 }
             };
@@ -143,7 +144,8 @@ namespace WaspIntegration.Business.Services
             }
             catch (Exception e)
             {
-                _logger.LogError($"**Failed while GetOpenOrders, whit message {e.Message}**");
+                _logger.LogError($"**Failed while GetOpenOrders, whit message {e.Message}, or probably" +
+                                 $"there are several Orders with the same reference number {orderOrderInfo.OrderNumber}**");
                 return new List<Guid>();
             }
         }
@@ -164,17 +166,17 @@ namespace WaspIntegration.Business.Services
             }
         }
 
-        private List<ManifestOrderInfoModel> GetManifestOrders(string textFromEmail)
+        private List<ManifestOrderInfoModel> GetManifestOrders(string textFromEmail, string supplierCode)
         {
             var manifestOrdersInfo = new List<ManifestOrderInfoModel>();
-            string[] separator = {SupplierCode};
+            string[] separator = {supplierCode};
             var orders = textFromEmail.Split(separator, StringSplitOptions.None);
             for (int i = 1; i < orders.Length; i++)
             {
                 manifestOrdersInfo.Add(new ManifestOrderInfoModel
                 {
-                    OrderNumber = orders[i].Substring(11, 13),
                     CompanyCode = orders[i].Substring(0, 3),
+                    OrderNumber = orders[i].Substring(11, 13),
                     OrderDate = orders[i].Substring(24, 10)
                 });
             }

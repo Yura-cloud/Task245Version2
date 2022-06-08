@@ -7,7 +7,8 @@ namespace WaspIntegration.Service.Interfaces
 {
     public interface ICanceledOrdersService
     {
-        void ParkingCanceledOrders(string emailText, IConfiguration configuration, string token, string location);
+        void ParkingCanceledOrders(string emailText, IConfiguration configuration, string token, string location,
+            string supplierCode);
         List<ManifestOrderInfoModel> ManifestInfos { get; set; }
         LinnworksMacroBase LinnWorks { get; set; }
     }

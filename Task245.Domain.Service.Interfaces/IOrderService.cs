@@ -5,6 +5,6 @@ namespace WaspIntegration.Service.Interfaces
 {
     public interface IOrderService
     {
-        Guid? PullOrders(string locationName, IConfiguration configuration, string token);
+        Guid? PullOrdersFromWasp(string locationName, IConfiguration configuration, string token);
     }
 }

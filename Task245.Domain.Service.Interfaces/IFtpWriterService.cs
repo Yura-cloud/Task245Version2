@@ -1,4 +1,3 @@
-using Renci.SshNet;
 using WaspIntegration.Domain;
 
 namespace WaspIntegration.Service.Interfaces

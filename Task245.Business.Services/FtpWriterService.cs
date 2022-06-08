@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using Microsoft.Extensions.Logging;
 using Renci.SshNet;
 using WaspIntegration.Domain;
@@ -31,9 +28,7 @@ namespace WaspIntegration.Business.Services
                 using (var client = new SftpClient(FtpSettings.Host, FtpSettings.Port, FtpSettings.UserName,
                            FtpSettings.Key))
                 {
-                    _logger.LogInformation("**Trying to connect**");
                     client.Connect();
-                    _logger.LogInformation("**Connection to Server, was established successfully**");
 
                     if (client.Exists(FtpSettings.WritePath))
                     {

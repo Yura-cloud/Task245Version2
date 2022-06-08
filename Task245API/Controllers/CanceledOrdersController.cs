@@ -12,31 +12,31 @@ namespace WaspAPI.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly ILogger<CanceledOrdersController> _logger;
-        private readonly IMailService _mailService;
+        private readonly IMailWaspService _mailWaspService;
         private readonly ICanceledOrdersService _canceledOrdersService;
 
         public CanceledOrdersController(IConfiguration configuration, ILogger<CanceledOrdersController> logger,
-            IMailService mailService, ICanceledOrdersService canceledOrdersService)
+            IMailWaspService mailWaspService, ICanceledOrdersService canceledOrdersService)
         {
             _configuration = configuration;
             _logger = logger;
-            _mailService = mailService;
+            _mailWaspService = mailWaspService;
             _canceledOrdersService = canceledOrdersService;
         }
 
         [HttpGet]
-        public IActionResult CancelOrders(string token, string email, string appPassword,string location)
+        public IActionResult CancelOrders(string token, string email, string appPassword,string location, string subject,
+            string supplierCode)
         {
             try
             {
-                var mailText = _mailService.ReadInboxLetters(email, appPassword);
+                var mailText = _mailWaspService.ReadInboxLetters(email, appPassword, subject);
                 if (string.IsNullOrEmpty(mailText))
                 {
-                    _logger.LogInformation("**Mail does not have any unread messages**");
                     return Ok();
                 }
 
-                _canceledOrdersService.ParkingCanceledOrders(mailText, _configuration, token,location);
+                _canceledOrdersService.ParkingCanceledOrders(mailText, _configuration, token,location,supplierCode);
             }
             catch (Exception e)
             {

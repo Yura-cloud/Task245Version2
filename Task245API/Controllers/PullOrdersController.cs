@@ -29,7 +29,7 @@ namespace WaspAPI.Controllers
         {
             try
             {
-                var locationId = _orderService.PullOrders(locationName, _configuration, token);
+                var locationId = _orderService.PullOrdersFromWasp(locationName, _configuration, token);
 
                 _manifestService.UploadManifest(locationId, _configuration, token);
             }
