@@ -7,8 +7,6 @@
   <ItemGroup>
     <PackageReference Include="Mail.dll" Version="3.0.22035.1741" />
     <PackageReference Include="MailKit" Version="3.2.0" />
-    <PackageReference Include="MailSystem.NET" Version="2.0.1" />
-    <PackageReference Include="Microsoft.AspNet.Mvc.Core" Version="6.0.0-rc1-final" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.0.0" />
