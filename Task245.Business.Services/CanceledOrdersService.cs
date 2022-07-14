@@ -45,7 +45,7 @@ namespace WaspIntegration.Business.Services
             var ordersDetails = GetOrdersDetailsFromEmail(emailText, supplierCode);
             if (ordersDetails.Count == 0)
             {
-                _logger.LogError("**There are no canceled orders in the Mail**");
+                _logger.LogError("There are no canceled orders in the Mail");
                 return;
             }
 
@@ -57,7 +57,7 @@ namespace WaspIntegration.Business.Services
                 return;
             }
 
-            _logger.LogInformation($"**It is not possible to add Note cause program failed to change Tag**");
+            _logger.LogError($"It is not possible to add Note cause program failed to change Tag");
         }
 
         private List<OrderDetails> GetOrdersDetailsFromEmail(string emailText, string supplierCode)
@@ -86,14 +86,14 @@ namespace WaspIntegration.Business.Services
             var ordersIds = GetOrdersIds(orderOrderInfo);
             if (ordersIds.Count == 0)
             {
-                _logger.LogError($"**There is no OpenOrders, whit this {orderOrderInfo.OrderNumber} refNumber**");
+                _logger.LogError($"There is no OpenOrders, whit this {orderOrderInfo.OrderNumber} refNumber");
                 return new OrderDetails();
             }
 
             if (ordersIds.Count > 1)
             {
                 _logger.LogError(
-                    $"**There are several OpenOrders with this {orderOrderInfo.OrderNumber} refNumber**");
+                    $"There are several OpenOrders with this {orderOrderInfo.OrderNumber} refNumber");
                 return new OrderDetails();
             }
 
@@ -108,7 +108,7 @@ namespace WaspIntegration.Business.Services
             }
             catch (Exception e)
             {
-                _logger.LogError($"**Failed while using GetOpenOrdersDetails, with message {e.Message}**");
+                _logger.LogError($"Failed while using GetOpenOrdersDetails, with message {e.Message}");
                 return new OrderDetails();
             }
         }
@@ -144,8 +144,8 @@ namespace WaspIntegration.Business.Services
             }
             catch (Exception e)
             {
-                _logger.LogError($"**Failed while GetOpenOrders, whit message {e.Message}, or probably" +
-                                 $"there are several Orders with the same reference number {orderOrderInfo.OrderNumber}**");
+                _logger.LogError($"Failed while GetOpenOrders, whit message {e.Message}, or probably" +
+                                 $"there are several Orders with the same reference number {orderOrderInfo.OrderNumber}");
                 return new List<Guid>();
             }
         }
@@ -202,7 +202,7 @@ namespace WaspIntegration.Business.Services
             }
             catch (Exception e)
             {
-                _logger.LogError($"**Failed while GetStockLocations() with, message{e.Message}**");
+                _logger.LogError($"Failed while GetStockLocations() with, message{e.Message}");
                 return new List<InventoryStockLocation>();
             }
         }
@@ -215,8 +215,8 @@ namespace WaspIntegration.Business.Services
             }
             catch (Exception e)
             {
-                _logger.LogInformation(
-                    $"**Failed while SetOrderNotes, in this OrderId => {orderId}, with message {e.Message}**");
+                _logger.LogError(
+                    $"Failed while SetOrderNotes, in this OrderId => {orderId}, with message {e.Message}");
             }
         }
 
@@ -228,7 +228,7 @@ namespace WaspIntegration.Business.Services
             }
             catch (Exception e)
             {
-                _logger.LogInformation($"**Failed while ChangeOrderTag, with message {e.Message}**");
+                _logger.LogError($"Failed while ChangeOrderTag, with message {e.Message}");
                 return false;
             }
 

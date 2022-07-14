@@ -15,18 +15,17 @@ namespace WaspIntegration.Business.Services.Mappers
             var channelOrder = new ChannelOrder();
             var splitProperties = orderLine.Split(';');
 
+            channelOrder.Currency = "GBP";
             channelOrder.ChannelBuyerName = splitProperties[2];
             channelOrder.OrderIdentifierTags = new HashSet<string>();
 
             channelOrder.DeliveryAddress = new ChannelAddress
             {
-                FullName = $"{splitProperties[16]} {splitProperties[17]}",
+                FullName = $"{splitProperties[29]}",
                 Company = splitProperties[37],
-                Address1 = splitProperties[29],
-                Address2 = $"{splitProperties[30]} {splitProperties[31]}",
-                Address3 = $"{splitProperties[32]} {splitProperties[33]}",
-                Town = splitProperties[46],
-                Region = splitProperties[14],
+                Address1 = splitProperties[30],
+                Town = splitProperties[31],
+                Region = splitProperties[32],
                 PostCode = splitProperties[34],
                 PhoneNumber = splitProperties[13]
             };
@@ -66,7 +65,7 @@ namespace WaspIntegration.Business.Services.Mappers
                     TaxCostInclusive = true,
                     UseChannelTax = true,
                     Qty = 1,
-                    ItemNumber = splitProperties[7],
+                    ItemNumber = splitProperties[9],
                     ChannelSKU = splitProperties[7],
                     IsService = false,
                     ItemTitle = splitProperties[8]

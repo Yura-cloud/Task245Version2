@@ -14,7 +14,9 @@ namespace WaspAPI
         {
             services.AddControllersWithViews();
 
-            services.AddSingleton<IFtpConfigManagerService, FtpConfigManagerService>();
+            services.AddScoped<IFtpConfigManagerService, FtpConfigManagerService>();
+            
+            services.AddScoped<IPriceService, PriceService>();
 
             services.AddScoped<IFtpWriterService, FtpWriterService>();
 

@@ -42,7 +42,7 @@ namespace WaspIntegration.Business.Services
             }
             catch (Exception e)
             {
-                _logger.LogDebug($"**Failed while working with FTP Server, with message {e.Message}**");
+                _logger.LogError($"Failed while working with FTP Server, with message {e.Message}");
                 return false;
             }
         }

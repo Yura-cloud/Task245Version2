@@ -28,10 +28,7 @@ namespace WaspIntegration.Business.Services
                 using (var client = new SftpClient(FtpSettings.Host, FtpSettings.Port, FtpSettings.UserName,
                            FtpSettings.Key))
                 {
-                    _logger.LogInformation("**Trying to connect**");
                     client.Connect();
-                    _logger.LogInformation("**Connection to Server, was established successfully**");
-
                     var files = client.ListDirectory(FtpSettings.ReadPath);
                     if (files == null) return Array.Empty<string>();
 
@@ -57,7 +54,7 @@ namespace WaspIntegration.Business.Services
             }
             catch (Exception e)
             {
-                _logger.LogDebug($"**Failed while working with FTP Server, with message {e.Message}**");
+                _logger.LogError($"Failed while working with FTP Server, with message {e.Message}");
                 return Array.Empty<string>();
             }
         }

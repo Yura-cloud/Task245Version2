@@ -94,7 +94,7 @@ namespace WaspIntegration.Business.Services
             catch (Exception e)
             {
                 _logger.LogError(
-                    $"**Failed while SetExtendedProperties, with this OrderId => {orderId}, with message {e.Message}**");
+                    $"Failed while SetExtendedProperties, with this OrderId => {orderId}, with message {e.Message}");
             }
         }
 
@@ -126,7 +126,7 @@ namespace WaspIntegration.Business.Services
             catch (Exception e)
             {
                 _logger.LogError(
-                    $"**Failed while GetProcessedOrderExtendedProperties, with this OrderId => {orderId}, with this message {e.Message}**");
+                    $"Failed while GetProcessedOrderExtendedProperties, with this OrderId => {orderId}, with this message {e.Message}");
                 return new List<OrderExtendedProperty>();
             }
         }
@@ -139,7 +139,7 @@ namespace WaspIntegration.Business.Services
             }
             catch (Exception e)
             {
-                _logger.LogError($"**Failed while GetOrdersById, with message {e.Message}**");
+                _logger.LogError($"Failed while GetOrdersById, with message {e.Message}");
                 return new List<OrderDetails>();
             }
         }
@@ -160,12 +160,12 @@ namespace WaspIntegration.Business.Services
                     return result;
                 }
 
-                _logger.LogError($"**Error while ExecuteCustomScriptQuery in response {result.ErrorMessage}**");
+                _logger.LogError($"Error while ExecuteCustomScriptQuery in response {result.ErrorMessage}");
                 return null;
             }
             catch (Exception ex)
             {
-                _logger.LogInformation($"**Failed while ExecuteCustomScriptQuery with error:{ex.Message}**");
+                _logger.LogError($"Failed while ExecuteCustomScriptQuery with error:{ex.Message}");
                 return null;
             }
         }
